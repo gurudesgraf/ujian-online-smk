@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Ujian SMK - Desain Grafis & Sablon</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --light: #ecf0f1;
+            --dark: #34495e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--secondary);
+            color: white;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+        }
+        
+        .btn-success:hover {
+            background-color: #219955;
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+        }
+        
+        .btn-warning:hover {
+            background-color: #e67e22;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .question-container {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+        }
+        
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .options {
+            margin-left: 20px;
+        }
+        
+        .option {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .option:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .option input[type="radio"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .timer {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--danger);
+            text-align: right;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .result-container {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .score {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .question-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .question-number {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+        
+        .question-number.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .question-number.answered {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: var(--light);
+        }
+        
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+        
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .exam-summary {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .exam-info-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex: 1;
+            min-width: 200px;
+            margin: 0 10px 10px 0;
+        }
+        
+        .exam-info-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .badge.success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .badge.danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .login-type-selector {
+            display: flex;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .login-type {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background-color: #f8f9fa;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-type.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .download-btn {
+            background-color: var(--success);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .download-btn:hover {
+            background-color: #219955;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .exam-summary {
+                flex-direction: column;
+            }
+            
+            .exam-info-card {
+                margin: 0 0 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Ujian Online SMK - Desain Grafis & Sablon</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="nav-home">Beranda</a></li>
+                    <li><a href="#" id="nav-admin" class="hidden">Admin</a></li>
+                    <li><a href="#" id="nav-student" class="hidden">Siswa</a></li>
+                    <li><a href="#" id="nav-logout" class="hidden">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Halaman Login -->
+        <div id="login-page" class="card">
+            <h2>Login ke Sistem Ujian</h2>
+            
+            <div class="login-type-selector">
+                <div class="login-type active" id="login-type-student">Siswa</div>
+                <div class="login-type" id="login-type-admin">Admin</div>
+            </div>
+            
+            <!-- Form Login Siswa -->
+            <div id="student-login-form">
+                <div class="form-group">
+                    <label for="student-name">Nama Lengkap Siswa</label>
+                    <input type="text" id="student-name" placeholder="Masukkan nama lengkap">
+                </div>
+                <div class="form-group">
+                    <label for="student-class">Kelas</label>
+                    <input type="text" id="student-class" placeholder="Contoh: XII TKJ 1">
+                </div>
+                <button class="btn" id="btn-login-student">Login sebagai Siswa</button>
+            </div>
+            
+            <!-- Form Login Admin -->
+            <div id="admin-login-form" class="hidden">
+                <div class="form-group">
+                    <label for="admin-username">Username</label>
+                    <input type="text" id="admin-username" placeholder="Masukkan username admin">
+                </div>
+                <div class="form-group">
+                    <label for="admin-password">Password</label>
+                    <input type="password" id="admin-password" placeholder="Masukkan password admin">
+                </div>
+                <button class="btn" id="btn-login-admin">Login sebagai Admin</button>
+            </div>
+        </div>
+
+        <!-- Halaman Admin -->
+        <div id="admin-page" class="hidden">
+            <h2>Panel Admin</h2>
+            
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="total-questions-stat">50</div>
+                    <div>Total Soal</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-students-stat">0</div>
+                    <div>Siswa Terdaftar</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="exams-completed-stat">0</div>
+                    <div>Ujian Selesai</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="avg-score-stat">0</div>
+                    <div>Rata-rata Nilai</div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>Kelola Soal Ujian</h3>
+                <p>Sistem ini sudah dilengkapi dengan 50 soal tentang CorelDRAW dan Teknik Sablon.</p>
+                
+                <div id="questions-list">
+                    <!-- Daftar soal akan ditampilkan di sini -->
+                </div>
+            </div>
+            
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3>Hasil Ujian Siswa</h3>
+                    <button class="btn btn-success" id="btn-download-all">
+                        <i class="fas fa-download"></i> Download Semua Hasil
+                    </button>
+                </div>
+                <table id="results-table">
+                    <thead>
+                        <tr>
+                            <th>Nama Siswa</th>
+                            <th>Kelas</th>
+                            <th>Waktu Pengerjaan</th>
+                            <th>Nilai</th>
+                            <th>Status</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data hasil ujian akan ditampilkan di sini -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Halaman Siswa -->
+        <div id="student-page" class="hidden">
+            <h2>Ujian Online SMK - Desain Grafis & Teknik Sablon</h2>
+            
+            <div class="card" id="exam-info">
+                <h3>Informasi Ujian</h3>
+                <div class="exam-summary">
+                    <div class="exam-info-card">
+                        <h3><i class="fas fa-file-alt"></i> Jumlah Soal</h3>
+                        <p id="total-questions">50</p>
+                    </div>
+                    <div class="exam-info-card">
+                        <h3><i class="fas fa-clock"></i> Waktu Per Soal</h3>
+                        <p id="time-per-question">30 detik</p>
+                    </div>
+                    <div class="exam-info-card">
+                        <h3><i class="fas fa-check-circle"></i> Status</h3>
+                        <p id="exam-status">Belum Dimulai</p>
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <h4><i class="fas fa-info-circle"></i> Petunjuk Ujian:</h4>
+                    <p>1. Ujian terdiri dari 50 soal pilihan ganda tentang CorelDRAW dan Teknik Sablon</p>
+                    <p>2. Setiap soal memiliki waktu pengerjaan 30 detik</p>
+                    <p>3. Gunakan navigasi soal untuk berpindah antar soal</p>
+                    <p>4. Pastikan untuk menekan tombol "Selesaikan Ujian" setelah selesai</p>
+                </div>
+                <button class="btn btn-success" id="btn-start-exam"><i class="fas fa-play"></i> Mulai Ujian</button>
+            </div>
+            
+            <div class="card hidden" id="exam-container">
+                <div class="timer" id="timer">
+                    <i class="fas fa-clock"></i> <span id="timer-value">30</span> detik tersisa
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress" id="exam-progress" style="width: 2%;"></div>
+                </div>
+                
+                <div class="question-list" id="question-nav">
+                    <!-- Navigasi nomor soal akan ditampilkan di sini -->
+                </div>
+                
+                <div id="current-question">
+                    <!-- Soal saat ini akan ditampilkan di sini -->
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" id="btn-prev"><i class="fas fa-arrow-left"></i> Sebelumnya</button>
+                    <button class="btn" id="btn-next">Selanjutnya <i class="fas fa-arrow-right"></i></button>
+                    <button class="btn btn-success" id="btn-submit"><i class="fas fa-check"></i> Selesaikan Ujian</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Halaman Hasil -->
+        <div id="result-page" class="card hidden">
+            <div class="result-container">
+                <h2>Hasil Ujian</h2>
+                <div class="score" id="final-score">0</div>
+                <p id="result-message"></p>
+                <div class="exam-summary" style="margin-top: 30px;">
+                    <div class="exam-info-card">
+                        <h3>Jawaban Benar</h3>
+                        <p id="correct-answers">0</p>
+                    </div>
+                    <div class="exam-info-card">
+                        <h3>Jawaban Salah</h3>
+                        <p id="wrong-answers">0</p>
+                    </div>
+                    <div class="exam-info-card">
+                        <h3>Tidak Dijawab</h3>
+                        <p id="unanswered">0</p>
+                    </div>
+                </div>
+                <button class="btn" id="btn-back-to-student"><i class="fas fa-arrow-left"></i> Kembali ke Halaman Siswa</button>
+            </div>
+        </div>
+
+        <!-- Halaman Beranda -->
+        <div id="home-page" class="card hidden">
+            <h2>Selamat Datang di Sistem Ujian Online SMK</h2>
+            <p>Sistem ini dirancang khusus untuk ujian mata pelajaran Desain Grafis dan Teknik Sablon dengan 50 soal pilihan ganda.</p>
+            
+            <div class="feature-list">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>CorelDRAW</h3>
+                    <p>Soal tentang penggunaan CorelDRAW untuk desain kalender dan grafis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3>Teknik Sablon</h3>
+                    <p>Soal tentang sejarah, alat, dan teknik sablon manual</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-print"></i>
+                    </div>
+                    <h3>DTF Printing</h3>
+                    <p>Soal tentang teknologi DTF dan perbandingannya dengan teknik lain</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Tools & Fitur</h3>
+                    <p>Soal tentang berbagai tool dan fitur dalam CorelDRAW</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" id="btn-get-started">Mulai Sekarang</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data aplikasi
+        const appData = {
+            currentUser: null,
+            questions: [
+                {
+                    id: 1,
+                    text: "Dalam proses pembuatan kalender di CorelDRAW, langkah awal yang paling tepat dilakukan sebelum menata bulan dan tanggal adalah…",
+                    options: {
+                        A: "Mengatur warna latar belakang",
+                        B: "Menentukan ukuran kertas pada menu Page Setup",
+                        C: "Menambahkan foto untuk desain kalender",
+                        D: "Mengubah warna garis outline",
+                        E: "Melakukan grouping pada seluruh objek"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 2,
+                    text: "Saat membuat kalender full page, mengapa penting mengatur margin atau bleed pada dokumen sejak awal?",
+                    options: {
+                        A: "Agar teks berubah menjadi gambar secara otomatis",
+                        B: "Untuk memastikan hasil cetak tidak terpotong di bagian tepi",
+                        C: "Supaya seluruh objek menjadi lebih ringan saat dibuka",
+                        D: "Agar file bisa dibuka di versi CorelDraw yang lama",
+                        E: "Untuk menambah ukuran font secara otomatis"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 3,
+                    text: "Fitur yang sering digunakan untuk membuat tabel tanggal pada kalender adalah…",
+                    options: {
+                        A: "Mesh Fill",
+                        B: "Shape Tool",
+                        C: "Table Tool",
+                        D: "Contour Tool",
+                        E: "Smart Drawing"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 4,
+                    text: "Jika ingin memasukkan hari dan tanggal secara otomatis menggunakan Macro, maka fungsi utama Macro Calendar adalah…",
+                    options: {
+                        A: "Mengubah kalender menjadi format PDF",
+                        B: "Menghasilkan grid dan tanggal secara otomatis",
+                        C: "Menghilangkan garis tabel",
+                        D: "Menambahkan efek 3D pada kalender",
+                        E: "Membuat animasi hari demi hari"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 5,
+                    text: "Ketika ingin menempatkan foto pada kalender tanpa merusak komposisi layout, fitur yang paling sering digunakan adalah…",
+                    options: {
+                        A: "PowerClip",
+                        B: "Transparency",
+                        C: "Envelope",
+                        D: "Extrude",
+                        E: "Free Transform"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 6,
+                    text: "Teknik sablon pertama kali berkembang pesat di Asia, terutama di Jepang dan Cina, karena…",
+                    options: {
+                        A: "Negara tersebut memiliki mesin cetak modern lebih awal",
+                        B: "Banyak bahan tekstil keras untuk dicetak",
+                        C: "Mereka mengembangkan teknik cetak menggunakan kain sutra",
+                        D: "Banyaknya industri alat berat",
+                        E: "Karena sablon digunakan sebagai alat kontrol pemerintahan"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 7,
+                    text: "Pada awal masuk ke Indonesia, teknik sablon digunakan terutama untuk…",
+                    options: {
+                        A: "Membuat poster digital",
+                        B: "Pencetakan kaos massal",
+                        C: "Pembuatan spanduk dan poster manual",
+                        D: "Desain website",
+                        E: "Cetak buku pelajaran"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 8,
+                    text: "Disebut 'screen printing' karena…",
+                    options: {
+                        A: "Menggunakan layar komputer",
+                        B: "Menggunakan screen atau kain berpori sebagai media cetak",
+                        C: "Hasil akhir seperti tampilan layar",
+                        D: "Tidak menggunakan tinta sama sekali",
+                        E: "Hanya dapat mencetak warna hitam putih"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 9,
+                    text: "Alasan sablon masih digunakan hingga sekarang meskipun sudah ada mesin digital adalah…",
+                    options: {
+                        A: "Hanya sablon yang bisa menghasilkan warna neon",
+                        B: "Hasil sablon selalu lebih cepat daripada digital",
+                        C: "Biaya produksi sablon untuk kuantitas banyak lebih murah",
+                        D: "Sablon tidak membutuhkan operator",
+                        E: "Sablon tidak butuh pengeringan tinta"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 10,
+                    text: "Perkembangan sablon modern mulai meningkat ketika ditemukannya…",
+                    options: {
+                        A: "Printer inkjet",
+                        B: "Tinta sablon berbahan air",
+                        C: "Emulsi foto yang peka cahaya",
+                        D: "Kain sutra sintetis",
+                        E: "Mesin press otomatis"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 11,
+                    text: "Fungsi utama Standard Toolbar dalam CorelDRAW adalah…",
+                    options: {
+                        A: "Mengatur efek 3D",
+                        B: "Mengatur warna objek",
+                        C: "Menyediakan akses cepat ke fitur dasar seperti New, Save, Undo",
+                        D: "Mengatur bentuk garis",
+                        E: "Mengedit node objek"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 12,
+                    text: "Tombol Undo dan Redo berada pada toolbar karena…",
+                    options: {
+                        A: "Fitur tersebut jarang digunakan",
+                        B: "Pengguna sering melakukan kesalahan dan perlu kembali ke langkah sebelumnya",
+                        C: "Untuk memperbesar objek",
+                        D: "Untuk membuat efek bayangan",
+                        E: "Untuk mengubah teks menjadi kurva"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 13,
+                    text: "Toolbar yang berisi pengaturan ukuran outline, warna outline, dan jenis garis disebut…",
+                    options: {
+                        A: "Property Bar",
+                        B: "Standard Bar",
+                        C: "Color Bar",
+                        D: "Outline Pen Toolbar",
+                        E: "Status Bar"
+                    },
+                    correctAnswer: "D",
+                    time: 30
+                },
+                {
+                    id: 14,
+                    text: "Fungsi Property Bar selalu berubah mengikuti…",
+                    options: {
+                        A: "Versi CorelDRAW",
+                        B: "Warna objek",
+                        C: "Tool yang sedang aktif",
+                        D: "Ukuran layar monitor",
+                        E: "Mode tampilan workspace"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 15,
+                    text: "Menu untuk mengatur alignment objek secara cepat dapat ditemukan pada…",
+                    options: {
+                        A: "Status Bar",
+                        B: "Arrange Toolbar",
+                        C: "Toolbox",
+                        D: "Menu Bar",
+                        E: "Ruler Bar"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 16,
+                    text: "Tool yang digunakan untuk menggambar bentuk kotak sempurna adalah…",
+                    options: {
+                        A: "Ellipse Tool",
+                        B: "Rectangle Tool",
+                        C: "Shape Tool",
+                        D: "Smart Fill Tool",
+                        E: "Zoom Tool"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 17,
+                    text: "Shape Tool digunakan untuk…",
+                    options: {
+                        A: "Menghapus objek",
+                        B: "Mengubah node dan kurva objek",
+                        C: "Mengatur ukuran kertas",
+                        D: "Mengatur PowerClip",
+                        E: "Mengganti warna outline"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 18,
+                    text: "Tool yang digunakan untuk membuat garis bebas seperti pensil adalah…",
+                    options: {
+                        A: "Bezier Tool",
+                        B: "Pen Tool",
+                        C: "Freehand Tool",
+                        D: "Artistic Media",
+                        E: "Virtual Segment Delete Tool"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 19,
+                    text: "Jika ingin mengambil warna dari gambar lain, maka pengguna memilih…",
+                    options: {
+                        A: "Smart Fill Tool",
+                        B: "Eyedropper Tool",
+                        C: "Zoom Tool",
+                        D: "Free Transform Tool",
+                        E: "Connector Tool"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 20,
+                    text: "Fitur PowerClip Inside dapat diakses melalui…",
+                    options: {
+                        A: "Bezier Tool",
+                        B: "Text Tool",
+                        C: "Pick Tool",
+                        D: "Blend Tool",
+                        E: "Drop Shadow"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 21,
+                    text: "Langkah paling penting sebelum menekan kaos pada mesin press adalah…",
+                    options: {
+                        A: "Mengganti warna tinta",
+                        B: "Memanaskan mesin hingga suhu yang sesuai",
+                        C: "Mengisi mesin dengan air pendingin",
+                        D: "Mengganti kabel listrik",
+                        E: "Mengoleskan lem pada plat press"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 22,
+                    text: "Ketika menekan transfer paper, biasanya suhu ideal untuk press kaos standar berkisar pada…",
+                    options: {
+                        A: "20–30°C",
+                        B: "40–60°C",
+                        C: "100–120°C",
+                        D: "150–170°C",
+                        E: "300–320°C"
+                    },
+                    correctAnswer: "D",
+                    time: 30
+                },
+                {
+                    id: 23,
+                    text: "Jika hasil press mudah terkelupas, kemungkinan besar karena…",
+                    options: {
+                        A: "Suhu terlalu rendah atau waktu press kurang lama",
+                        B: "Kaos terlalu tebal",
+                        C: "Mesin terlalu bersih",
+                        D: "Warna tinta terlalu banyak",
+                        E: "Kaos berwarna cerah"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 24,
+                    text: "Saat proses press, tekanan mesin berfungsi untuk…",
+                    options: {
+                        A: "Membuat warna lebih gelap",
+                        B: "Mengunci tinta atau lem pada permukaan kaos",
+                        C: "Menambah ukuran kaos",
+                        D: "Mengurangi suhu mesin",
+                        E: "Menghindari tinta menyerap ke bawah"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 25,
+                    text: "Setelah selesai press, tindakan yang benar adalah…",
+                    options: {
+                        A: "Langung melipat kaos dengan cepat",
+                        B: "Menyemprot kaos dengan air",
+                        C: "Membuka press dengan hati-hati dan mendinginkan hasil",
+                        D: "Menggosok kaos dengan kain basah",
+                        E: "Melepas tinta yang berlebih"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 26,
+                    text: "Sebelum mencetak dengan mesin DTF, langkah awal yang harus dilakukan adalah…",
+                    options: {
+                        A: "Mematikan komputer",
+                        B: "Memberi lem pada kaos",
+                        C: "Mengatur ukuran film dan desain pada software RIP",
+                        D: "Mengganti warna lampu ruangan",
+                        E: "Menyetel mesin press dulu"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 27,
+                    text: "Fungsi bubuk lem (adhesive powder) pada DTF adalah…",
+                    options: {
+                        A: "Memberi warna tambahan",
+                        B: "Menahan tinta agar tidak mengering",
+                        C: "Membantu tinta menempel pada kaos saat dipress",
+                        D: "Mengurangi ketebalan film",
+                        E: "Mengganti peran mesin press"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 28,
+                    text: "Pengeringan tinta DTF biasanya dilakukan dengan cara…",
+                    options: {
+                        A: "Menjemur di matahari",
+                        B: "Menggunakan oven khusus atau heater mesin",
+                        C: "Menggunakan kipas kecil",
+                        D: "Menyiram dengan air",
+                        E: "Menekan tinta menggunakan spatula"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 29,
+                    text: "Jika hasil cetak DTF terlihat retak setelah dicuci, penyebab paling umum adalah…",
+                    options: {
+                        A: "Film terlalu mahal",
+                        B: "Kaos kurang bagus",
+                        C: "Suhu press terlalu rendah",
+                        D: "Mesin printer terlalu besar",
+                        E: "Bubuk lem terlalu sedikit"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 30,
+                    text: "Salah satu hal yang perlu dicek sebelum mencetak DTF adalah…",
+                    options: {
+                        A: "Jumlah pasir di meja",
+                        B: "Kelembaban ruangan",
+                        C: "Ukuran spanduk",
+                        D: "Jumlah air dalam printer",
+                        E: "Jenis benang pada kaos"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 31,
+                    text: "Kelebihan utama mesin DTF dibandingkan mesin cutting sticker adalah…",
+                    options: {
+                        A: "Tidak membutuhkan komputer",
+                        B: "DTF dapat mencetak gambar full color tanpa proses layering",
+                        C: "Cutting lebih murah",
+                        D: "DTF tidak perlu di-press",
+                        E: "Cutting lebih cepat dari DTF"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 32,
+                    text: "Mesin cutting memiliki keunggulan dalam pembuatan…",
+                    options: {
+                        A: "Foto high-resolution",
+                        B: "Sticker vektor atau tulisan dengan garis rapi",
+                        C: "Gambar realistik",
+                        D: "Poster berwarna",
+                        E: "Kaos full color"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 33,
+                    text: "Kelebihan DTF dalam dunia percetakan kaos adalah…",
+                    options: {
+                        A: "Hanya dapat mencetak warna gelap",
+                        B: "Dapat mencetak pada hampir semua jenis kain",
+                        C: "Tidak menggunakan tinta sama sekali",
+                        D: "Tidak memerlukan press",
+                        E: "Menghasilkan gambar timbul 3D"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 34,
+                    text: "Mesin cutting lebih cocok digunakan untuk…",
+                    options: {
+                        A: "Produksi decal sederhana dan akurasi potong",
+                        B: "Mencetak foto ukuran besar",
+                        C: "Membuat desain berbasis piksel",
+                        D: "Membuat poster indoor",
+                        E: "Mencetak warna gradasi natural"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 35,
+                    text: "Salah satu keuntungan DTF dibanding sablon manual adalah…",
+                    options: {
+                        A: "Proses lebih cepat dan bisa menghasilkan detail halus",
+                        B: "Tidak membutuhkan mesin",
+                        C: "Kecepatan produksi lebih lambat",
+                        D: "Warna selalu hitam putih",
+                        E: "Tidak bisa digunakan pada kaos gelap"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 36,
+                    text: "Fungsi utama Envelope Tool adalah…",
+                    options: {
+                        A: "Mengubah warna objek",
+                        B: "Mengubah bentuk objek dengan distorsi mengikuti kurva tertentu",
+                        C: "Menambah bayangan pada objek",
+                        D: "Menggabungkan dua objek",
+                        E: "Membuat efek blur"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 37,
+                    text: "Envelope sering digunakan untuk…",
+                    options: {
+                        A: "Melengkungkan teks agar sesuai bentuk bidang",
+                        B: "Menghapus background",
+                        C: "Menambah outline",
+                        D: "Mengubah objek menjadi bitmap",
+                        E: "Menambah efek transparansi"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 38,
+                    text: "Ketika menggunakan Envelope, node dapat dipindah agar…",
+                    options: {
+                        A: "Objek berubah warna",
+                        B: "Bentuk mengikuti arah lengkungan yang dipilih",
+                        C: "Huruf menjadi 3D",
+                        D: "Objek hilang",
+                        E: "Teks berubah otomatis"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 39,
+                    text: "Envelope dapat diterapkan pada…",
+                    options: {
+                        A: "Hanya foto saja",
+                        B: "Hanya garis",
+                        C: "Teks dan objek vektor",
+                        D: "Hanya objek bitmap",
+                        E: "Hanya latar belakang"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 40,
+                    text: "Salah satu preset Envelope adalah…",
+                    options: {
+                        A: "Fish Eye",
+                        B: "Add Noise",
+                        C: "Sparkle",
+                        D: "Watercolor",
+                        E: "X-Ray"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 41,
+                    text: "Fungsi utama Contour Tool adalah…",
+                    options: {
+                        A: "Menghapus node",
+                        B: "Memberikan garis atau bentuk berlapis menjauhi atau mendekati objek",
+                        C: "Membuat objek melengkung",
+                        D: "Mengubah objek menjadi bitmap",
+                        E: "Menghasilkan animasi"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 42,
+                    text: "Contour sering digunakan untuk…",
+                    options: {
+                        A: "Efek tebal pada teks",
+                        B: "Menghapus background",
+                        C: "Membuat highlight",
+                        D: "Menambah bayangan",
+                        E: "Mengganti warna dokumen"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 43,
+                    text: "Saat membuat outside contour, hasilnya adalah…",
+                    options: {
+                        A: "Bentuk berlapis muncul ke bagian luar objek",
+                        B: "Objek berpindah ke layer lain",
+                        C: "Warna objek otomatis berubah",
+                        D: "Objek dimiringkan",
+                        E: "Objek menjadi blur"
+                    },
+                    correctAnswer: "A",
+                    time: 30
+                },
+                {
+                    id: 44,
+                    text: "Untuk mengatur jumlah langkah contour, pengguna dapat mengubah nilai…",
+                    options: {
+                        A: "Outline",
+                        B: "Steps",
+                        C: "Transparency",
+                        D: "Shadow",
+                        E: "PowerClip"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 45,
+                    text: "Inside contour digunakan ketika…",
+                    options: {
+                        A: "Ingin memperbesar objek",
+                        B: "Ingin memperkecil bentuk ke arah dalam",
+                        C: "Mengubah bentuk menjadi kotak",
+                        D: "Menghapus warna fill",
+                        E: "Mengatur efek 3D"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 46,
+                    text: "Untuk menyimpan file agar dapat dibuka kembali di CorelDRAW, format yang digunakan adalah…",
+                    options: {
+                        A: "JPG",
+                        B: "PNG",
+                        C: "CDR",
+                        D: "PDF",
+                        E: "EPS"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 47,
+                    text: "Jika ingin mengirim file ke percetakan agar hasil tidak berubah, format yang paling stabil adalah…",
+                    options: {
+                        A: "JPG",
+                        B: "PDF",
+                        C: "PNG",
+                        D: "CDR",
+                        E: "BMP"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 48,
+                    text: "Format JPG digunakan ketika…",
+                    options: {
+                        A: "Membutuhkan kualitas gambar tertinggi",
+                        B: "Ingin file dengan ukuran kecil dan cocok untuk foto",
+                        C: "Membuat file vektor",
+                        D: "Membuat file transparan",
+                        E: "Membuat file besar tanpa kompresi"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                },
+                {
+                    id: 49,
+                    text: "Format PNG biasanya dipilih karena…",
+                    options: {
+                        A: "Tidak mendukung transparansi",
+                        B: "Ukuran selalu lebih besar dari JPG",
+                        C: "Mendukung transparansi sehingga cocok untuk logo",
+                        D: "Tidak bisa dicetak",
+                        E: "Hanya untuk foto gelap"
+                    },
+                    correctAnswer: "C",
+                    time: 30
+                },
+                {
+                    id: 50,
+                    text: "Format EPS cocok digunakan ketika…",
+                    options: {
+                        A: "File hanya untuk diposting di Instagram",
+                        B: "File ingin di-edit di banyak software grafis seperti Adobe Illustrator",
+                        C: "Hanya digunakan untuk desain web",
+                        D: "Hanya untuk foto",
+                        E: "Tidak bisa dibuka oleh percetakan"
+                    },
+                    correctAnswer: "B",
+                    time: 30
+                }
+            ],
+            exam: {
+                currentQuestion: 0,
+                answers: {},
+                timeRemaining: 30,
+                timer: null
+            },
+            users: [
+                { username: 'admin', password: 'admin123', role: 'admin', name: 'Administrator' }
+            ],
+            results: [],
+            students: []
+        };
+
+        // Simpan soal ke localStorage
+        function saveQuestions() {
+            localStorage.setItem('examQuestions', JSON.stringify(appData.questions));
+        }
+
+        // Simpan hasil ujian ke localStorage
+        function saveResults() {
+            localStorage.setItem('examResults', JSON.stringify(appData.results));
+        }
+
+        // Simpan data siswa ke localStorage
+        function saveStudents() {
+            localStorage.setItem('students', JSON.stringify(appData.students));
+        }
+
+        // Inisialisasi data
+        function initializeQuestions() {
+            if (localStorage.getItem('examResults')) {
+                appData.results = JSON.parse(localStorage.getItem('examResults'));
+            }
+            
+            if (localStorage.getItem('students')) {
+                appData.students = JSON.parse(localStorage.getItem('students'));
+            }
+        }
+
+        // Fungsi untuk menampilkan halaman berdasarkan role user
+        function showPage(pageId) {
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('admin-page').classList.add('hidden');
+            document.getElementById('student-page').classList.add('hidden');
+            document.getElementById('result-page').classList.add('hidden');
+            document.getElementById('home-page').classList.add('hidden');
+            
+            document.getElementById(pageId).classList.remove('hidden');
+            
+            // Tampilkan navigasi yang sesuai
+            document.getElementById('nav-admin').classList.add('hidden');
+            document.getElementById('nav-student').classList.add('hidden');
+            document.getElementById('nav-logout').classList.add('hidden');
+            
+            if (appData.currentUser) {
+                document.getElementById('nav-logout').classList.remove('hidden');
+                
+                if (appData.currentUser.role === 'admin') {
+                    document.getElementById('nav-admin').classList.remove('hidden');
+                    if (pageId === 'admin-page') {
+                        loadAdminPage();
+                    }
+                } else {
+                    document.getElementById('nav-student').classList.remove('hidden');
+                    if (pageId === 'student-page') {
+                        loadStudentPage();
+                    }
+                }
+            }
+        }
+
+        // Load halaman admin
+        function loadAdminPage() {
+            // Update statistik
+            document.getElementById('total-questions-stat').textContent = appData.questions.length;
+            document.getElementById('total-students-stat').textContent = appData.students.length;
+            document.getElementById('exams-completed-stat').textContent = appData.results.length;
+            
+            // Hitung rata-rata nilai
+            let totalScore = 0;
+            appData.results.forEach(result => {
+                totalScore += parseFloat(result.score);
+            });
+            const avgScore = appData.results.length > 0 ? (totalScore / appData.results.length).toFixed(2) : 0;
+            document.getElementById('avg-score-stat').textContent = avgScore;
+            
+            // Tampilkan daftar soal
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = '';
+            
+            appData.questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question-container';
+                questionElement.innerHTML = `
+                    <h4>Soal ${question.id}</h4>
+                    <p class="question-text">${question.text}</p>
+                    <div class="options">
+                        <div class="option"><strong>A.</strong> ${question.options.A}</div>
+                        <div class="option"><strong>B.</strong> ${question.options.B}</div>
+                        <div class="option"><strong>C.</strong> ${question.options.C}</div>
+                        <div class="option"><strong>D.</strong> ${question.options.D}</div>
+                        <div class="option"><strong>E.</strong> ${question.options.E}</div>
+                    </div>
+                    <p><strong>Jawaban Benar:</strong> ${question.correctAnswer}</p>
+                    <p><strong>Waktu:</strong> ${question.time} detik</p>
+                `;
+                questionsList.appendChild(questionElement);
+            });
+            
+            // Tampilkan hasil ujian
+            const resultsTable = document.getElementById('results-table').querySelector('tbody');
+            resultsTable.innerHTML = '';
+            
+            if (appData.results.length === 0) {
+                resultsTable.innerHTML = '<tr><td colspan="6" style="text-align: center;">Belum ada hasil ujian.</td></tr>';
+            } else {
+                appData.results.forEach((result, index) => {
+                    const status = result.score >= 70 ? 'Lulus' : 'Tidak Lulus';
+                    const statusClass = result.score >= 70 ? 'success' : 'danger';
+                    
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${result.studentName}</td>
+                        <td>${result.studentClass}</td>
+                        <td>${result.completionTime}</td>
+                        <td>${result.score}</td>
+                        <td><span class="badge ${statusClass}">${status}</span></td>
+                        <td>
+                            <button class="btn" onclick="viewResultDetails(${index})"><i class="fas fa-eye"></i> Detail</button>
+                            <button class="download-btn" onclick="downloadResult(${index})"><i class="fas fa-download"></i> Download</button>
+                        </td>
+                    `;
+                    resultsTable.appendChild(row);
+                });
+            }
+        }
+
+        // Load halaman siswa
+        function loadStudentPage() {
+            document.getElementById('exam-info').classList.remove('hidden');
+            document.getElementById('exam-container').classList.add('hidden');
+            document.getElementById('result-page').classList.add('hidden');
+            
+            // Reset data ujian
+            appData.exam.currentQuestion = 0;
+            appData.exam.answers = {};
+            appData.exam.timeRemaining = 30;
+            
+            // Update informasi ujian
+            document.getElementById('total-questions').textContent = appData.questions.length;
+            
+            // Cek apakah siswa sudah menyelesaikan ujian
+            const studentResult = appData.results.find(r => r.studentName === appData.currentUser.name);
+            if (studentResult) {
+                document.getElementById('exam-status').textContent = 'Sudah Selesai';
+                document.getElementById('btn-start-exam').disabled = true;
+                document.getElementById('btn-start-exam').innerHTML = '<i class="fas fa-check"></i> Ujian Telah Selesai';
+            } else {
+                document.getElementById('exam-status').textContent = 'Belum Dimulai';
+                document.getElementById('btn-start-exam').disabled = false;
+                document.getElementById('btn-start-exam').innerHTML = '<i class="fas fa-play"></i> Mulai Ujian';
+            }
+        }
+
+        // Tampilkan soal saat ujian
+        function showQuestion(index) {
+            if (index < 0 || index >= appData.questions.length) return;
+            
+            appData.exam.currentQuestion = index;
+            const question = appData.questions[index];
+            
+            // Update navigasi soal
+            updateQuestionNavigation();
+            
+            // Update progress bar
+            const progress = ((index + 1) / appData.questions.length) * 100;
+            document.getElementById('exam-progress').style.width = `${progress}%`;
+            
+            // Tampilkan soal
+            const questionContainer = document.getElementById('current-question');
+            questionContainer.innerHTML = `
+                <div class="question-container">
+                    <h3>Soal ${index + 1}</h3>
+                    <p class="question-text">${question.text}</p>
+                    <div class="options">
+                        ${Object.entries(question.options).map(([key, value]) => `
+                            <div class="option">
+                                <input type="radio" id="option-${key}" name="answer" value="${key}" 
+                                    ${appData.exam.answers[index] === key ? 'checked' : ''}>
+                                <label for="option-${key}"><strong>${key}.</strong> ${value}</label>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Set timer
+            appData.exam.timeRemaining = question.time;
+            updateTimerDisplay();
+            
+            // Hapus timer sebelumnya dan mulai yang baru
+            if (appData.exam.timer) {
+                clearInterval(appData.exam.timer);
+            }
+            
+            appData.exam.timer = setInterval(() => {
+                appData.exam.timeRemaining--;
+                updateTimerDisplay();
+                
+                if (appData.exam.timeRemaining <= 0) {
+                    clearInterval(appData.exam.timer);
+                    nextQuestion();
+                }
+            }, 1000);
+        }
+
+        // Update navigasi soal
+        function updateQuestionNavigation() {
+            const questionNav = document.getElementById('question-nav');
+            questionNav.innerHTML = '';
+            
+            appData.questions.forEach((_, index) => {
+                const numberElement = document.createElement('div');
+                numberElement.className = 'question-number';
+                if (index === appData.exam.currentQuestion) {
+                    numberElement.classList.add('active');
+                }
+                if (appData.exam.answers[index]) {
+                    numberElement.classList.add('answered');
+                }
+                numberElement.textContent = index + 1;
+                numberElement.onclick = () => showQuestion(index);
+                questionNav.appendChild(numberElement);
+            });
+        }
+
+        // Update tampilan timer
+        function updateTimerDisplay() {
+            document.getElementById('timer-value').textContent = appData.exam.timeRemaining;
+        }
+
+        // Pindah ke soal berikutnya
+        function nextQuestion() {
+            // Simpan jawaban saat ini
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (selectedOption) {
+                appData.exam.answers[appData.exam.currentQuestion] = selectedOption.value;
+            }
+            
+            if (appData.exam.currentQuestion < appData.questions.length - 1) {
+                showQuestion(appData.exam.currentQuestion + 1);
+            } else {
+                // Ini adalah soal terakhir, tampilkan konfirmasi selesaikan ujian
+                if (confirm('Ini adalah soal terakhir. Selesaikan ujian?')) {
+                    finishExam();
+                }
+            }
+        }
+
+        // Pindah ke soal sebelumnya
+        function prevQuestion() {
+            // Simpan jawaban saat ini
+            const selectedOption = document.querySelector('input[name="answer"]:checked');
+            if (selectedOption) {
+                appData.exam.answers[appData.exam.currentQuestion] = selectedOption.value;
+            }
+            
+            if (appData.exam.currentQuestion > 0) {
+                showQuestion(appData.exam.currentQuestion - 1);
+            }
+        }
+
+        // Selesaikan ujian dan hitung nilai
+        function finishExam() {
+            // Hentikan timer
+            if (appData.exam.timer) {
+                clearInterval(appData.exam.timer);
+            }
+            
+            // Hitung skor
+            let correctAnswers = 0;
+            let wrongAnswers = 0;
+            let unanswered = 0;
+            
+            appData.questions.forEach((question, index) => {
+                if (appData.exam.answers[index]) {
+                    if (appData.exam.answers[index] === question.correctAnswer) {
+                        correctAnswers++;
+                    } else {
+                        wrongAnswers++;
+                    }
+                } else {
+                    unanswered++;
+                }
+            });
+            
+            const score = (correctAnswers / appData.questions.length) * 100;
+            
+            // Simpan hasil
+            const result = {
+                studentName: appData.currentUser.name,
+                studentClass: appData.currentUser.class,
+                completionTime: new Date().toLocaleString(),
+                score: score.toFixed(2),
+                correctAnswers: correctAnswers,
+                wrongAnswers: wrongAnswers,
+                unanswered: unanswered,
+                answers: {...appData.exam.answers}
+            };
+            
+            appData.results.push(result);
+            
+            // Simpan siswa jika belum ada
+            const existingStudent = appData.students.find(s => s.name === appData.currentUser.name);
+            if (!existingStudent) {
+                appData.students.push({
+                    name: appData.currentUser.name,
+                    class: appData.currentUser.class
+                });
+            }
+            
+            saveResults();
+            saveStudents();
+            
+            // Tampilkan hasil
+            showResult(score, correctAnswers, wrongAnswers, unanswered);
+        }
+
+        // Tampilkan halaman hasil
+        function showResult(score, correctAnswers, wrongAnswers, unanswered) {
+            document.getElementById('student-page').classList.add('hidden');
+            document.getElementById('result-page').classList.remove('hidden');
+            
+            document.getElementById('final-score').textContent = score.toFixed(2);
+            document.getElementById('correct-answers').textContent = correctAnswers;
+            document.getElementById('wrong-answers').textContent = wrongAnswers;
+            document.getElementById('unanswered').textContent = unanswered;
+            
+            let message = '';
+            if (score >= 85) {
+                message = 'Sangat Baik! Pertahankan prestasimu.';
+            } else if (score >= 70) {
+                message = 'Baik! Terus tingkatkan belajarmu.';
+            } else if (score >= 60) {
+                message = 'Cukup. Perlu lebih banyak belajar lagi.';
+            } else {
+                message = 'Kurang. Silakan pelajari kembali materinya.';
+            }
+            
+            document.getElementById('result-message').textContent = message;
+        }
+
+        // Fungsi admin: lihat detail hasil
+        function viewResultDetails(index) {
+            const result = appData.results[index];
+            let detailText = `Nama: ${result.studentName}\n`;
+            detailText += `Kelas: ${result.studentClass}\n`;
+            detailText += `Waktu Selesai: ${result.completionTime}\n`;
+            detailText += `Nilai: ${result.score}\n`;
+            detailText += `Jawaban Benar: ${result.correctAnswers}\n`;
+            detailText += `Jawaban Salah: ${result.wrongAnswers}\n`;
+            detailText += `Tidak Dijawab: ${result.unanswered}\n\n`;
+            detailText += 'Detail Jawaban:\n';
+            
+            appData.questions.forEach((question, qIndex) => {
+                const userAnswer = result.answers[qIndex] || '-';
+                const isCorrect = userAnswer === question.correctAnswer;
+                detailText += `Soal ${qIndex + 1}: ${userAnswer} ${isCorrect ? '(Benar)' : '(Salah)'}\n`;
+            });
+            
+            alert(detailText);
+        }
+
+        // Fungsi untuk download hasil individu
+        function downloadResult(index) {
+            const result = appData.results[index];
+            
+            let content = `HASIL UJIAN SISWA\n`;
+            content += `================\n\n`;
+            content += `Nama: ${result.studentName}\n`;
+            content += `Kelas: ${result.studentClass}\n`;
+            content += `Waktu Selesai: ${result.completionTime}\n`;
+            content += `Nilai: ${result.score}\n`;
+            content += `Jawaban Benar: ${result.correctAnswers}\n`;
+            content += `Jawaban Salah: ${result.wrongAnswers}\n`;
+            content += `Tidak Dijawab: ${result.unanswered}\n\n`;
+            content += `Status: ${result.score >= 70 ? 'LULUS' : 'TIDAK LULUS'}\n\n`;
+            
+            content += `DETAIL JAWABAN:\n`;
+            content += `================\n`;
+            
+            appData.questions.forEach((question, qIndex) => {
+                const userAnswer = result.answers[qIndex] || '-';
+                const isCorrect = userAnswer === question.correctAnswer;
+                content += `Soal ${qIndex + 1}: ${userAnswer} ${isCorrect ? '(Benar)' : '(Salah)'}\n`;
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Hasil_Ujian_${result.studentName}_${result.completionTime.replace(/[/:\\?*]/g, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Fungsi untuk download semua hasil
+        function downloadAllResults() {
+            if (appData.results.length === 0) {
+                alert('Tidak ada hasil ujian yang dapat didownload.');
+                return;
+            }
+            
+            let content = `LAPORAN HASIL UJIAN SISWA\n`;
+            content += `=========================\n\n`;
+            content += `Total Siswa: ${appData.results.length}\n`;
+            content += `Tanggal Generate: ${new Date().toLocaleString()}\n\n`;
+            
+            // Hitung statistik
+            let totalScore = 0;
+            let passed = 0;
+            let failed = 0;
+            
+            appData.results.forEach(result => {
+                totalScore += parseFloat(result.score);
+                if (result.score >= 70) passed++;
+                else failed++;
+            });
+            
+            const avgScore = totalScore / appData.results.length;
+            
+            content += `STATISTIK:\n`;
+            content += `Rata-rata Nilai: ${avgScore.toFixed(2)}\n`;
+            content += `Siswa Lulus: ${passed}\n`;
+            content += `Siswa Tidak Lulus: ${failed}\n\n`;
+            
+            content += `DETAIL HASIL PER SISWA:\n`;
+            content += `======================\n\n`;
+            
+            appData.results.forEach((result, index) => {
+                content += `SISWA ${index + 1}:\n`;
+                content += `Nama: ${result.studentName}\n`;
+                content += `Kelas: ${result.studentClass}\n`;
+                content += `Waktu Selesai: ${result.completionTime}\n`;
+                content += `Nilai: ${result.score}\n`;
+                content += `Jawaban Benar: ${result.correctAnswers}\n`;
+                content += `Jawaban Salah: ${result.wrongAnswers}\n`;
+                content += `Tidak Dijawab: ${result.unanswered}\n`;
+                content += `Status: ${result.score >= 70 ? 'LULUS' : 'TIDAK LULUS'}\n\n`;
+            });
+            
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Laporan_Hasil_Ujian_${new Date().toISOString().split('T')[0]}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeQuestions();
+            
+            // Tampilkan halaman beranda pertama kali
+            document.getElementById('home-page').classList.remove('hidden');
+            
+            // Toggle form login
+            document.getElementById('login-type-student').addEventListener('click', function() {
+                document.getElementById('login-type-student').classList.add('active');
+                document.getElementById('login-type-admin').classList.remove('active');
+                document.getElementById('student-login-form').classList.remove('hidden');
+                document.getElementById('admin-login-form').classList.add('hidden');
+            });
+            
+            document.getElementById('login-type-admin').addEventListener('click', function() {
+                document.getElementById('login-type-admin').classList.add('active');
+                document.getElementById('login-type-student').classList.remove('active');
+                document.getElementById('admin-login-form').classList.remove('hidden');
+                document.getElementById('student-login-form').classList.add('hidden');
+            });
+            
+            // Login Siswa
+            document.getElementById('btn-login-student').addEventListener('click', function() {
+                const name = document.getElementById('student-name').value.trim();
+                const studentClass = document.getElementById('student-class').value.trim();
+                
+                if (!name) {
+                    alert('Nama lengkap siswa harus diisi!');
+                    return;
+                }
+                
+                if (!studentClass) {
+                    alert('Kelas harus diisi!');
+                    return;
+                }
+                
+                appData.currentUser = {
+                    name: name,
+                    class: studentClass,
+                    role: 'student'
+                };
+                
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('home-page').classList.add('hidden');
+                showPage('student-page');
+            });
+            
+            // Login Admin
+            document.getElementById('btn-login-admin').addEventListener('click', function() {
+                const username = document.getElementById('admin-username').value;
+                const password = document.getElementById('admin-password').value;
+                
+                const user = appData.users.find(u => u.username === username && u.password === password);
+                
+                if (user) {
+                    appData.currentUser = user;
+                    document.getElementById('login-page').classList.add('hidden');
+                    document.getElementById('home-page').classList.add('hidden');
+                    showPage('admin-page');
+                } else {
+                    alert('Username atau password admin salah!');
+                }
+            });
+            
+            // Navigation
+            document.getElementById('nav-home').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (appData.currentUser) {
+                    if (appData.currentUser.role === 'admin') {
+                        showPage('admin-page');
+                    } else {
+                        showPage('student-page');
+                    }
+                } else {
+                    showPage('home-page');
+                }
+            });
+            
+            document.getElementById('nav-logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                appData.currentUser = null;
+                document.getElementById('login-page').classList.remove('hidden');
+                document.getElementById('admin-page').classList.add('hidden');
+                document.getElementById('student-page').classList.add('hidden');
+                document.getElementById('result-page').classList.add('hidden');
+                document.getElementById('home-page').classList.add('hidden');
+                
+                document.getElementById('nav-admin').classList.add('hidden');
+                document.getElementById('nav-student').classList.add('hidden');
+                document.getElementById('nav-logout').classList.add('hidden');
+                
+                // Reset form login
+                document.getElementById('student-name').value = '';
+                document.getElementById('student-class').value = '';
+                document.getElementById('admin-username').value = '';
+                document.getElementById('admin-password').value = '';
+            });
+            
+            // Beranda: Mulai
+            document.getElementById('btn-get-started').addEventListener('click', function() {
+                document.getElementById('home-page').classList.add('hidden');
+                document.getElementById('login-page').classList.remove('hidden');
+            });
+            
+            // Siswa: Mulai ujian
+            document.getElementById('btn-start-exam').addEventListener('click', function() {
+                document.getElementById('exam-info').classList.add('hidden');
+                document.getElementById('exam-container').classList.remove('hidden');
+                showQuestion(0);
+            });
+            
+            // Siswa: Navigasi soal
+            document.getElementById('btn-next').addEventListener('click', nextQuestion);
+            document.getElementById('btn-prev').addEventListener('click', prevQuestion);
+            
+            // Siswa: Selesaikan ujian
+            document.getElementById('btn-submit').addEventListener('click', function() {
+                if (confirm('Apakah Anda yakin ingin menyelesaikan ujian?')) {
+                    finishExam();
+                }
+            });
+            
+            // Siswa: Kembali dari hasil
+            document.getElementById('btn-back-to-student').addEventListener('click', function() {
+                showPage('student-page');
+            });
+            
+            // Admin: Download semua hasil
+            document.getElementById('btn-download-all').addEventListener('click', downloadAllResults);
+        });
+    </script>
+</body>
+</html>
